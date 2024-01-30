@@ -20,7 +20,7 @@ statuscheck
 echo -e "\e[35m unzip and setup files \e[0m"
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$my_log
-cp expense.conf /etc/nginx/default.d/expense.conf
+cp /root/expense-latest/expense.conf /etc/nginx/default.d/expense.conf
 statuscheck
 
 echo -e "\e[36m restart nginx \e[0m"
