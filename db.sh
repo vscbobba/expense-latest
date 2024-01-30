@@ -1,7 +1,14 @@
 #!/bin/bash
 source common.sh
 
-echo -e "\e[31m install software \e[0m"
+if [ -z "$1" ];then
+  echo "Please enter passwd"
+  exit
+fi
+
+mysql_pass=$1
+
+echo -e "\e[31m copy repo \e[0m"
 
 cp /root/expense-latest/mysql.repo /etc/yum.repos.d/mysql.repo &>$my_log
 statuscheck
@@ -21,7 +28,7 @@ statuscheck
 
 
 echo -e "\e[35m secure install \e[0m"
-mysql_secure_installation --set-root-pass ExpenseApp@1
+mysql_secure_installation --set-root-pass ${mysql_pass}
 statuscheck
 
 
