@@ -21,12 +21,12 @@ unzip /tmp/backend.zip &>>$my_log
 cd /app 
 npm install &>>$my_log
 
-echo -e "\e[32m copy service \e[0m"
 
+echo -e "\e[34m copy service \e[0m"
 cp /root/expense-latest/backend.service /etc/systemd/system/backend.service &>>$my_log
 
 
-echo -e "\e[32m start service \e[0m"
+echo -e "\e[35m start service \e[0m"
 
 systemctl daemon-reload &>>$my_log
 systemctl enable backend &>>$my_log
