@@ -28,9 +28,8 @@ statuscheck
 
 
 echo -e "\e[35m secure install \e[0m"
-mysql_secure_installation --set-root-pass ${mysql_pass}
+mysql_secure_installation --set-root-pass ${mysql_pass} &>>my_log
 statuscheck
 
 
 #mysql -uroot -pExpenseApp@1
-#status_check
