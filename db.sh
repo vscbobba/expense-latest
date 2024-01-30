@@ -1,4 +1,5 @@
 #!/bin/bash
+source common.sh
 
 echo -e "\e[31m install software \e[0m"
 
