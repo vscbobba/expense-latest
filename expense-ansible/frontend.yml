@@ -1,0 +1,35 @@
+- name: fronetned server steup
+  hosts: frontend
+  become: yes
+  tasks: 
+     - name: install nginx
+       dnf: name=nginx state=latest
+     - name: start nginx
+       service:
+           name: nginx
+           state: started
+           enabled: yes
+     - name: remove files
+       file:
+          path: /usr/share/nginx/html
+          state: absent
+     - name: copy files
+       copy:
+         src: /root/expense-latest/expense.conf
+         dest: /etc/nginx/default.d/expense.conf
+     - name: create directory
+       file:
+          path: /usr/share/nginx/html
+          state: directory
+     - name: unarchive file
+       unarchive: 
+          src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
+          dest: /usr/share/nginx/html
+          remote_src: yes
+     - name: restart nginx
+       systemd:
+          name: nginx
+          state: restarted
+          enabled: yes
+          
+       

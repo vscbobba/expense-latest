@@ -1,0 +1,44 @@
+- name: install backend setup
+  hosts: backend
+  become: yes
+  tasks:
+    - name: disable and enable 
+      shell: dnf module disable nodejs -y && dnf module enable nodejs:18
+    - name: install nodejs
+      dnf:
+        name: nodejs
+        state: present
+    - name: install mysql
+      dnf:
+        name: mysql
+        state: present
+    - name: create user
+      user:
+        name: expense
+    - name: delete old directory
+      file:
+        path: /app
+        state: absent
+    - name: create directory
+      file:
+        path: /app
+        state: directory
+    - name: unzip content
+      unarchive:
+        src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+        dest: /app
+        remote_src: yes
+    - name: install npm
+      shell: npm install
+      args:
+       chdir: /app 
+    - name: copy files
+      copy:
+         src: /root/expense-latest/backend.service
+         dest: /etc/systemd/system/backend.service
+    - name: start backend
+      systemd:
+       name: backend
+       state: restarted
+       enabled: yes
+       daemon-reload: yes
