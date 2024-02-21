@@ -1,0 +1,8 @@
+sudo set-hostname frontend
+sudo set-hostname DB
+sudo set-hostname backend
+
+
+frontend ansible_host=30.0.1.1 ansible_user=centos ansible_ssh_pass=DevOps321
+DB ansible_host=30.0.1.1 ansible_user=centos ansible_ssh_pass=DevOps321
+backend ansible_host=30.0.1.1 ansible_user=centos ansible_ssh_pass=DevOps321
